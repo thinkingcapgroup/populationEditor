@@ -1,0 +1,170 @@
+
+
+<div class="page-header">
+<h1 id="check">Population Editor</h1>
+<button id = "add" onclick="addSample((Math.floor(Math.random() * 100) + 80))" style = "clear:right">Create Random Sample</button>
+<div style="float:right; width: 500px;">Change the number and press outside of the text area, then create a new population to see it's effect. You can reset everything by pressing F5. </div>
+
+</div>
+
+<div id = "filter">
+<select id = "mySelect" onchange="updateNumbers()">
+	<option value="0">Lower Tuition</option>
+	<option value="1">Athletic Equipment</option>
+	<option value="2">Research Equipment</option>
+	<option value="3">School Events</option>
+	<option value="4">Student Medical</option>
+</select><br>
+
+<div style="float:right"><b>Actions</b><br>
+
+Effect:
+<select id = "myEffect">
+	<option value="0">Lower Tuition</option>
+	<option value="1">Athletic Equipment</option>
+	<option value="2">Research Equipment</option>
+	<option value="3">School Events</option>
+	<option value="4">Student Medical</option>
+
+	<option value="5">Socialite</option>
+	<option value="6">Athlete</option>
+	<option value="7">Researcher</option>
+	<option value="8">Media Lover</option>
+	<option value="9">Reader</option>
+
+	<option value="10">Business</option>
+	<option value="11">Engineering</option>
+	<option value="12">Tech</option>
+	<option value="13">Fine Arts</option>
+	<option value="14">Liberal Arts</option>
+
+	<option value="15">Poverty</option>
+	<option value="16">Low</option>
+	<option value="17">Lower Middle</option>
+	<option value="18">Upper Middle</option>
+	<option value="19">High</option>
+</select>
+<br>
+Outcome: <select id = "myOutcome">
+	<option value="1">Positive</option>
+	<option value="-1">Negative</option>
+</select><br>
+Amount: 
+	<input id="myAmount" style="width:35px" value = ".1"/>
+<br>
+Turn Counter: <span id="turnCounter">0</span><br>
+
+<button onclick="actionResult()"> Submit</button>
+
+</div>
+
+
+
+
+<b>Groups</b><br>
+Socialite Average:  <input type = "text" style="width:30px" id="soAve" onchange="myFunction('soAve', 0)" /> 
+Athlete Average:  <input type = "text" style="width:30px" id="atAve" onchange="myFunction('atAve', 2)"/> 
+Researcher Average:  <input type = "text" style="width:30px" id="reAve" onchange="myFunction('reAve', 4)"/> 
+Media Lover Average: <input type = "text" style="width:30px" id="mlAve" onchange="myFunction('mlAve', 6)"/> 
+Reader Average: <input type = "text" style="width:30px" id="rdAve" onchange="myFunction('rdAve', 9)"/><br>
+
+Socialite Variation: <input type = "text" style="width:30px" id="soVar"/> 
+Athlete Variation: <input type = "text" style="width:30px" id="atVar"/> 
+Researcher Variation: <input type = "text" style="width:30px" id="reVar"/> 
+Media Lover Variation: <input type = "text" style="width:30px" id="mloVar"/> 
+Reader Variation: <input type = "text" style="width:30px" id="rdVar"/><br>
+<br>
+
+<b>Class</b><br>Poverty Average:  <input type = "text" style="width:30px" id="poAve"/> 
+Low Average:  <input type = "text" style="width:30px" id="loAve"/> 
+Mid-Low Average:  <input type = "text" style="width:30px" id="mloAve" /> 
+Mid-High Average: <input type = "text" style="width:30px" id="mhAve"/> 
+High Average: <input type = "text" style="width:30px" id = "hiAve"/><br>
+
+Poverty Variation: <input type = "text" style="width:30px" id="poVar"/> 
+Low Variation: <input type = "text" style="width:30px" id="loVar"/> 
+Mid-Low Variation: <input type = "text" style="width:30px" id = "mlVar"/> 
+Mid-High Variation: <input type = "text" style="width:30px" id="mhVar"/> 
+High Variation: <input type = "text" style="width:30px" id="hiVar"/><br>
+
+<br><b>Major</b><br>
+
+Business Average: <input type = "text" style="width:30px" id="buAve"/> 
+Engineering Average: <input type = "text" style="width:30px" id="enAve"/> 
+Tech Average: <input type = "text" style="width:30px" var id="teAve"/> 
+Fine Arts Average: <input type = "text" style="width:30px" id="faAve"/> 
+Lib Arts Average: <input type = "text" style="width:30px" id="laAve"/><br>
+
+Business Variation: <input type = "text" style="width:30px" id="buVar"/> 
+Engineering Variation: <input type = "text" style="width:30px" id="enVar"/> 
+Tech Variation: <input type = "text" style="width:30px" id="teVar"/> 
+Fine Arts Variation: <input type = "text" style="width:30px" id="faVar"/> 
+Lib Arts Variation: <input type = "text" style="width:30px" id="laVar"/><br>
+</div>
+
+<div id="scoreArea">
+
+<h3>Score Table</h3></div>
+<div id = "tableArea">
+<table id = "scoreTable" class="sortable">
+<thead>
+	<tr>
+		<th></th>
+		<th>Lower Tuition</th>
+		<th>Ath Budget</th>
+		<th>Res Budget</th>
+		<th>School Events</th>
+		<th>Medical Care</th>
+		<th>Socialite</th>
+		<th>Athlete</th>
+		<th>Researcher</th>
+		<th>Media Lover</th>
+		<th>Reader</th>
+		<th>Business</th>
+		<th>Technology</th>
+		<th>Engineering</th>
+		<th>Lib. Arts</th>
+		<th>Fine Arts</th>
+		<th>Poverty</th>
+		<th>Low</th>
+		<th>Lower Middle</th>
+		<th>Upper Middle</th>
+		<th>High</th>
+		
+		
+	</tr>
+</thead>
+<tbody id="scoreTbody"></tbody>
+</table>
+<h3 id = "sampleText"></h3>
+
+	<table id = "sampleTable" class="sortable">
+	
+	<thead>
+		<tr>
+			<th>Student #</th>
+			<th>Gender</th>
+			<th>Race</th>
+			<th>Body</th>
+			<th>Group</th>
+			<th>Major</th>
+			<th>Economic Class</th>
+			<th>Tuition Score</th>
+			<th>Athletic Score</th>
+			<th>Research Score</th>
+			<th>Events Score</th>
+			<th>Medical Score</th>
+			
+			
+		</tr>
+	</thead>
+	<tbody id="tbody">
+	
+        </tbody>
+
+	</table>	
+
+
+</div>
+
+
