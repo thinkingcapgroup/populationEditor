@@ -4,7 +4,7 @@ var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var fs = require("fs");
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('data/test.sqlite3');
+
 
 
 //security app disable
@@ -18,25 +18,14 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 //database
-db.serialize(function() {
-    db.run("CREATE TABLE IF NOT EXISTS counts (key TEXT, value INTEGER)")
-  	db.run("INSERT INTO counts (key, value) VALUES (?, ?)", "counter", 0);  
-});
+
 
 //pages
 app.get('/', function(req,res){	
 	res.render('home');
-	db.run("INSERT INTO counts (key, value) VALUES (?, ?)", "counter", 1);  
+
 });
 
-app.get('/data', function(req, res){
-    db.all("SELECT value FROM counts", function(err, row){
-         if(err){
-         	console.log(err);
-         }
-         res.json(row);
-    });
-});
 
 
 //port starting and listening
