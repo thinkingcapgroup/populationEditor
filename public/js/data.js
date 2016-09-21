@@ -33,7 +33,7 @@ var race = ["Human", "Android", "Martian"]
 var bodyType = ["Slim", "Average", "Large"]
 
 var groupIssues = [
-  [2,2,2,1,0,3,1,1,-1,2],
+  [3,2,2,1,0,3,1,1,-1,2],
   [0,2,3,1,0,3,1,1,-1,2],
   [1,1,-1,2,1,2,3,1,-2,3],
   [-1,1,-1,1,2,2,3,1,0,4],
@@ -56,7 +56,7 @@ var majorIssues = [
   [0,3,0,4,-3,1,3,1,-2,1]
 ];
 
-var groupIssuesOrigin = [
+var groupIssuesChange = [
   [2,2,2,1,0,3,1,1,-1,2],
   [0,2,3,1,0,3,1,1,-1,2],
   [1,1,-1,2,1,2,3,1,-2,3],
@@ -64,7 +64,7 @@ var groupIssuesOrigin = [
   [0,3,-2,2,0,2,1,3,3,1]
 ];
 //goes Poverty/Low/MediumLow/MediumHigh/High
-var classIssuesOrigin = [
+var classIssuesChange = [
   [2,2,0,1,2,1,-2,2,3,1],
   [0,2,-1,1,1,3,1,2,2,1],
   [3,1,1,3,2,2,-1,1,1,1],
@@ -72,7 +72,7 @@ var classIssuesOrigin = [
   [-1,1,-2,3,2,-1,3,1,0,4]
 ];
 //goes Business/Engineering/Technology/FineArts/LiberalArts
-var majorIssuesOrigin = [
+var majorIssuesChange = [
   [-2,1,3,1,1,1,0,3,2,1],
   [-1,2,1,1,1,3,-2,1,3,1],
   [3,1,-1,1,3,1,0,4,0,2],
@@ -118,37 +118,117 @@ function addSample(sampleSize){
       res =  (((groupIssues[groupRandom][4]) + (Math.floor(Math.random() * (groupIssues[groupRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][4]) + (Math.floor(Math.random() * (groupIssues[majorRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][4]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
       event =  (((groupIssues[groupRandom][6]) + (Math.floor(Math.random() * (groupIssues[groupRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][6]) + (Math.floor(Math.random() * (groupIssues[majorRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][6]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
       med =  (((groupIssues[groupRandom][8]) + (Math.floor(Math.random() * (groupIssues[groupRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][8]) + (Math.floor(Math.random() * (groupIssues[majorRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][8]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
-    
-      if(tuit > 4){
-        tuit = 4;
-      }
-      else if(tuit < -4){
-        tuit = 4;
-      }
-      if(ath > 4){
-        ath = 4;
-      }
-      else if(ath < -4){
-        ath = 4;
-      }
-      if(res > 4){
-        res = 4;
-      }
-      else if(res < -4){
-        res = 4;
-      }
-      if(event > 4){
-        event = 4;
-      }
-      else if(event < -4){
-        event = 4;
-      }
-      if(med > 4){
-        med = 4;
-      }
-      else if(med < -4){
-        med = 4;
-      }
+
+      tuit = tuit/3;
+      ath = ath/3;
+      res =  res/3;
+      event = event/3;
+      med = med/3;
+
+      tuit = tuit.toFixed(2);  
+       ath = ath.toFixed(2);  
+      res =  res.toFixed(2);  
+      event = event.toFixed(2);  
+      med = med.toFixed(2);  
+
+      //random group #s
+
+      var cell1 = row.insertCell(0);
+      var text1 = y + 1;
+      cell1.innerHTML = text1
+      var cell2 = row.insertCell(1);
+      var text2 = gender[(Math.floor(Math.random() * 3))];
+      cell2.innerHTML = text2;
+      
+     
+      var cell3 = row.insertCell(2);
+      cell3.innerHTML = race[(Math.floor(Math.random() * 3))];
+      var cell4 = row.insertCell(3);
+      cell4.innerHTML = bodyType[(Math.floor(Math.random() * 3))];
+      var cell5 = row.insertCell(4);
+      cell5.innerHTML = groupList[groupRandom];
+      var cell6 = row.insertCell(5);
+      cell6.innerHTML = majorList[majorRandom];
+      var cell7 = row.insertCell(6);
+      cell7.innerHTML = stuEconomic[ecoClassRandom];
+       var cell8 = row.insertCell(7);
+      cell8.innerHTML = tuit;
+       var cell9 = row.insertCell(8);
+      cell9.innerHTML = ath;
+       var cell10 = row.insertCell(9);
+      cell10.innerHTML = res;
+       var cell11 = row.insertCell(10);
+      cell11.innerHTML = event;
+       var cell12 = row.insertCell(11);
+      cell12.innerHTML = med;
+      var sampleStudent = [cell1.innerHTML, cell2.innerHTML, cell3.innerHTML, cell4.innerHTML, cell5.innerHTML, cell6.innerHTML, cell7.innerHTML, cell8.innerHTML, cell9.innerHTML, cell10.innerHTML, cell11.innerHTML, cell12.innerHTML];
+      sample.push(sampleStudent);
+  
+  }
+  calculateScores();
+}
+
+function addSample2(sampleSize){
+
+  document.getElementById("sampleText").innerHTML = "Sample Size: " + sampleSize;  
+  var table = document.getElementById("sampleTable");
+  var tableLength = table.rows.length;
+
+  //if there
+  if(tableLength > 1){
+    for(var x = 1; x < tableLength; x++){
+      document.getElementById("sampleTable").deleteRow(1);
+    } 
+  }
+    sample = [];
+
+  //change GroupIssuesChange w/ new averages
+  
+  //add the player score to groupissuechange
+  for(var c = 0; c < 5; c++){
+      for(var a = 0; a < 10; a++){
+        q = a*2;
+      groupIssuesChange[c][q] += (playerScore[c] + playerScore[c+5]);
+      classIssuesChange[c][q] += (playerScore[c] + playerScore[c+10]);
+      majorIssuesChange[c][q] += (playerScore[c] + playerScore[c+15]);
+    }
+  }   
+  
+  for(var y = 0 ; y < sampleSize; y++){
+      var tbody = document.getElementById('tbody');
+      var row = tbody.insertRow();
+      var groupRandom = Math.floor(Math.random()* 5);
+      var majorRandom = Math.floor(Math.random()* 5);
+      var ecoClassRandom = Math.floor(Math.random()* 5);
+
+
+
+      var ath =0;
+      var res = 0;
+      var tuit = 0;
+      var med = 0;
+      var event = 0;
+
+
+
+  //SCORE calculated by (group issue + variable) + (major issue + variable)  + (class issue + variable) 
+      tuit = (((groupIssuesChange[groupRandom][0]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][0]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][0]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      ath =  (((groupIssuesChange[groupRandom][2]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][2]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][2]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      res =  (((groupIssuesChange[groupRandom][4]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][4]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][4]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      event =  (((groupIssuesChange[groupRandom][6]) + (Math.floor(Math.random() * (groupIssues[groupRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][6]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][6]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      med =  (((groupIssuesChange[groupRandom][8]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][8]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][8]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+
+      tuit = tuit/3;
+      ath = ath/3;
+      res =  res/3;
+      event = event/3;
+      med = med/3;
+
+      tuit = tuit.toFixed(2);  
+       ath = ath.toFixed(2);  
+      res =  res.toFixed(2);  
+      event = event.toFixed(2);  
+      med = med.toFixed(2);  
 
       //random group #s
 
