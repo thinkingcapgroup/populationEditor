@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var fs = require("fs");
-var sqlite3 = require('sqlite3').verbose();
+
 
 
 
