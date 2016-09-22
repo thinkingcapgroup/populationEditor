@@ -33,7 +33,7 @@ var race = ["Human", "Android", "Martian"]
 var bodyType = ["Slim", "Average", "Large"]
 
 var groupIssues = [
-  [3,2,2,1,0,3,1,1,-1,2],
+  [3.0,2.0,2.0,1.0,0.0,3.0,1.0,1.0,-1.0,2.0],
   [0,2,3,1,0,3,1,1,-1,2],
   [1,1,-1,2,1,2,3,1,-2,3],
   [-1,1,-1,1,2,2,3,1,0,4],
@@ -56,29 +56,7 @@ var majorIssues = [
   [0,3,0,4,-3,1,3,1,-2,1]
 ];
 
-var groupIssuesChange = [
-  [2,2,2,1,0,3,1,1,-1,2],
-  [0,2,3,1,0,3,1,1,-1,2],
-  [1,1,-1,2,1,2,3,1,-2,3],
-  [-1,1,-1,1,2,2,3,1,0,4],
-  [0,3,-2,2,0,2,1,3,3,1]
-];
-//goes Poverty/Low/MediumLow/MediumHigh/High
-var classIssuesChange = [
-  [2,2,0,1,2,1,-2,2,3,1],
-  [0,2,-1,1,1,3,1,2,2,1],
-  [3,1,1,3,2,2,-1,1,1,1],
-  [-2,1,2,1,-1,3,1,2,2,1],
-  [-1,1,-2,3,2,-1,3,1,0,4]
-];
-//goes Business/Engineering/Technology/FineArts/LiberalArts
-var majorIssuesChange = [
-  [-2,1,3,1,1,1,0,3,2,1],
-  [-1,2,1,1,1,3,-2,1,3,1],
-  [3,1,-1,1,3,1,0,4,0,2],
-  [2,2,0,3,-2,2,2,2,2,1],
-  [0,3,0,4,-3,1,3,1,-2,1]
-];
+
 
 
 function addSample(sampleSize){
@@ -165,6 +143,38 @@ function addSample(sampleSize){
       sample.push(sampleStudent);
   
   }
+
+  //lets calculate the averages of the scores
+  var tfoot = document.getElementById("tfoot");
+  var thing = tfoot.rows.length;
+
+
+ if(thing > 1){
+         document.getElementById("tfoot").deleteRow(1);
+    
+    
+  }
+
+  row = tfoot.insertRow();
+  cell = row.insertCell(0);
+  cell.innerHTML = "Score Averages"; 
+
+for (u = 0; u < 5; u++){
+  //go through the sample scores
+  var scoreAverage = 0.0;
+  for (w = 0; w < sample.length; w++){
+    count = u + 7;
+    studentScore = sample[w][count];
+    scoreAverage += parseFloat(studentScore);
+    
+  }
+  scoreAverage = (scoreAverage / sample.length);
+  scoreAverage = scoreAverage.toFixed(2);
+  cell = row.insertCell(1+u);
+  cell.innerHTML = scoreAverage;
+
+}
+
   calculateScores();
 }
 
@@ -188,9 +198,9 @@ function addSample2(sampleSize){
   for(var c = 0; c < 5; c++){
       for(var a = 0; a < 10; a++){
         q = a*2;
-      groupIssuesChange[c][q] += (playerScore[c] + playerScore[c+5]);
-      classIssuesChange[c][q] += (playerScore[c] + playerScore[c+10]);
-      majorIssuesChange[c][q] += (playerScore[c] + playerScore[c+15]);
+      groupIssues[c][q] += (playerScore[c] + playerScore[c+5]);
+      classIssues[c][q] += (playerScore[c] + playerScore[c+10]);
+      majorIssues[c][q] += (playerScore[c] + playerScore[c+15]);
     }
   }   
   
@@ -212,11 +222,11 @@ function addSample2(sampleSize){
 
 
   //SCORE calculated by (group issue + variable) + (major issue + variable)  + (class issue + variable) 
-      tuit = (((groupIssuesChange[groupRandom][0]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][0]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][0]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
-      ath =  (((groupIssuesChange[groupRandom][2]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][2]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][2]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
-      res =  (((groupIssuesChange[groupRandom][4]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][4]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][4]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
-      event =  (((groupIssuesChange[groupRandom][6]) + (Math.floor(Math.random() * (groupIssues[groupRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][6]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][6]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
-      med =  (((groupIssuesChange[groupRandom][8]) + (Math.floor(Math.random() * (groupIssuesChange[groupRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssuesChange[majorRandom][8]) + (Math.floor(Math.random() * (groupIssuesChange[majorRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssuesChange[ecoClassRandom][8]) + (Math.floor(Math.random() * (classIssuesChange[ecoClassRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      tuit = (((groupIssues[groupRandom][0]) + (Math.floor(Math.random() * (groupIssues[groupRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][0]) + (Math.floor(Math.random() * (groupIssues[majorRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][0]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][1]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      ath =  (((groupIssues[groupRandom][2]) + (Math.floor(Math.random() * (groupIssues[groupRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][2]) + (Math.floor(Math.random() * (groupIssues[majorRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][2]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][3]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      res =  (((groupIssues[groupRandom][4]) + (Math.floor(Math.random() * (groupIssues[groupRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][4]) + (Math.floor(Math.random() * (groupIssues[majorRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][4]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][5]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      event =  (((groupIssues[groupRandom][6]) + (Math.floor(Math.random() * (groupIssues[groupRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][6]) + (Math.floor(Math.random() * (groupIssues[majorRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][6]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][7]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
+      med =  (((groupIssues[groupRandom][8]) + (Math.floor(Math.random() * (groupIssues[groupRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((majorIssues[majorRandom][8]) + (Math.floor(Math.random() * (groupIssues[majorRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1)) + (((classIssues[ecoClassRandom][8]) + (Math.floor(Math.random() * (classIssues[ecoClassRandom][9]) ) )) * ( Math.random() < 0.5 ? -1 : 1));
 
       tuit = tuit/3;
       ath = ath/3;
@@ -267,6 +277,9 @@ function addSample2(sampleSize){
   calculateScores();
 }
 
+
+
+
 function calculateScores(){
 
 
@@ -284,7 +297,7 @@ var tbody = document.getElementById('scoreTbody');
 
 var row = tbody.insertRow();
 var cell = row.insertCell(0);
-cell.innerHTML = "% Liked"
+cell.innerHTML = "# of Students Favoring Position"
 
 scoreHolder = [0,0,0,0,0];
 
@@ -325,7 +338,7 @@ for(var x = 0; x < sample.length; x++){
   //now put it in a table
   for(var y = 0; y < 5; y++){
     cell = row.insertCell(y+1);
-    cell.innerHTML = scoreHolder[y];
+    cell.innerHTML = scoreHolder[y] + "/100";
   }
   
   //now make a row for all the group averages
@@ -333,7 +346,7 @@ for(var z =0; z < 5; z++){
 
   row = tbody.insertRow();
   cell = row.insertCell(0);
-  cell.innerHTML = positions[z]; 
+  cell.innerHTML = positions[z] + " Average"; 
   cell = row.insertCell(1);
   cell = row.insertCell(2);
   cell = row.insertCell(3);
@@ -356,6 +369,7 @@ for(var z =0; z < 5; z++){
     }
     number = number.toFixed(2)
     varNumber = groupIssues[z][counter+1]
+   
     cell.innerHTML = number + "V" + varNumber;
     counter = counter + 2;
     
@@ -397,6 +411,8 @@ if(number > 4){
   }
 }
 
+
+
 }
 
 window.onload = function(){
@@ -410,6 +426,7 @@ window.onload = function(){
   document.getElementById("reVar").value = groupIssues[0][5];
   document.getElementById("mlVar").value = groupIssues[0][7];
   document.getElementById("rdVar").value = groupIssues[0][9];
+
 
   document.getElementById("poAve").value = classIssues[0][0];
   document.getElementById("loAve").value = classIssues[0][2];
@@ -436,6 +453,10 @@ window.onload = function(){
 
 }
 
+function clearActions(){
+  playerScore= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+}
+
 function updateNumbers(){
   var x = document.getElementById("mySelect").value;
   document.getElementById("soAve").value = groupIssues[x][0];
@@ -443,11 +464,13 @@ function updateNumbers(){
   document.getElementById("reAve").value = groupIssues[x][4];
   document.getElementById("mlAve").value = groupIssues[x][6];
   document.getElementById("rdAve").value = groupIssues[x][8];
-  document.getElementById("soVar").value = groupIssues[x][0];
-  document.getElementById("atVar").value = groupIssues[x][2];
-  document.getElementById("reVar").value = groupIssues[x][4];
-  document.getElementById("mlVar").value = groupIssues[x][6];
-  document.getElementById("rdVar").value = groupIssues[x][8];
+  document.getElementById("soVar").value = groupIssues[x][1];
+  document.getElementById("atVar").value = groupIssues[x][3];
+  document.getElementById("reVar").value = groupIssues[x][5];
+  document.getElementById("mlVar").value = groupIssues[x][7];
+  document.getElementById("rdVar").value = groupIssues[x][9];
+
+  console.log("HELLO")
 
   document.getElementById("poAve").value = classIssues[x][0];
   document.getElementById("loAve").value = classIssues[x][2];
@@ -460,7 +483,7 @@ function updateNumbers(){
   document.getElementById("mhVar").value = classIssues[x][7];
   document.getElementById("hiVar").value = classIssues[x][9];
 
-    document.getElementById("buAve").value = majorIssues[x][0];
+  document.getElementById("buAve").value = majorIssues[x][0];
   document.getElementById("enAve").value = majorIssues[x][2];
   document.getElementById("teAve").value = majorIssues[x][4];
   document.getElementById("faAve").value = majorIssues[x][6];
@@ -472,7 +495,9 @@ function updateNumbers(){
   document.getElementById("laVar").value = majorIssues[x][9];
 }
 
-function moveNumbers(){}
+function clearPlayerScore(){
+  playerScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+}
 
 function myFunction(id, num) {
     var x = document.getElementById("mySelect").value;

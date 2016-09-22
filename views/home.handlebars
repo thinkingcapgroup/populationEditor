@@ -2,21 +2,15 @@
 
 <div class="page-header">
 <h1 id="check">Population Editor</h1>
-<button id = "add" onclick="addSample((Math.floor(Math.random() * 100) + 80))" style = "clear:right">Create Random Sample</button>
-<div style="float:right; width: 500px;">Change the number and press outside of the text area, then create a new population to see it's effect. You can reset everything by pressing F5. </div>
+<button id = "add" onclick="addSample(100)" style = "clear:right">Create Sample with These Averages</button>
+<div style="float:right; width: 500px;">Change the number and press outside of the text area, then create a new population to see it's effect. You can reset everything by pressing F5. <br></div>
 
 </div>
 
 <div id = "filter">
-<select id = "mySelect" onchange="updateNumbers()">
-	<option value="0">Lower Tuition</option>
-	<option value="1">Athletic Equipment</option>
-	<option value="2">Research Equipment</option>
-	<option value="3">School Events</option>
-	<option value="4">Student Medical</option>
-</select><br>
+<h1>Student Variables</h1>
 
-<div style="float:right"><b>Actions</b><br>
+<div style="float:right"><h1>Player Actions</h1><br>
 
 Effect:
 <select id = "myEffect">
@@ -54,9 +48,20 @@ Amount:
 <br>
 Turn Counter: <span id="turnCounter">0</span><br>
 
-<button onclick="actionResult()"> Submit</button>
+<button onclick="actionResult()">Player Action</button><hr>
+<button onclick="clearPlayerScore()">Clear Player Score</button>
 
 </div>
+
+<b>Positions:</b> <select id = "mySelect" onchange="updateNumbers()">
+	<option value="0">Lower Tuition</option>
+	<option value="1">Athletic Equipment</option>
+	<option value="2">Research Equipment</option>
+	<option value="3">School Events</option>
+	<option value="4">Student Medical</option>
+</select><br><br>
+
+
 
 
 
@@ -68,44 +73,44 @@ Researcher Average:  <input type = "text" style="width:30px" id="reAve" onchange
 Media Lover Average: <input type = "text" style="width:30px" id="mlAve" onchange="myFunction('mlAve', 6)"/> 
 Reader Average: <input type = "text" style="width:30px" id="rdAve" onchange="myFunction('rdAve', 9)"/><br>
 
-Socialite Variation: <input type = "text" style="width:30px" id="soVar"/> 
-Athlete Variation: <input type = "text" style="width:30px" id="atVar"/> 
-Researcher Variation: <input type = "text" style="width:30px" id="reVar"/> 
-Media Lover Variation: <input type = "text" style="width:30px" id="mloVar"/> 
-Reader Variation: <input type = "text" style="width:30px" id="rdVar"/><br>
+Socialite Variation: <input type = "text" style="width:30px" id="soVar" onchange="myFunction('soVar', 1)"/> 
+Athlete Variation: <input type = "text" style="width:30px" id="atVar" onchange="myFunction('atVar', 3)"/> 
+Researcher Variation: <input type = "text" style="width:30px" id="reVar" onchange="myFunction('reVar', 5)"/> 
+Media Lover Variation: <input type = "text" style="width:30px" id="mloVar" onchange="myFunction('mloVar', 7)"/> 
+Reader Variation: <input type = "text" style="width:30px" id="rdVar" onchange="myFunction('rdVar', 9)"/><br>
 <br>
 
-<b>Class</b><br>Poverty Average:  <input type = "text" style="width:30px" id="poAve"/> 
-Low Average:  <input type = "text" style="width:30px" id="loAve"/> 
-Mid-Low Average:  <input type = "text" style="width:30px" id="mloAve" /> 
-Mid-High Average: <input type = "text" style="width:30px" id="mhAve"/> 
-High Average: <input type = "text" style="width:30px" id = "hiAve"/><br>
+<b>Class</b><br>Poverty Average:  <input type = "text" style="width:30px" id="poAve" onchange="myFunction('poAve', 0)"/> 
+Low Average:  <input type = "text" style="width:30px" id="loAve" onchange="myFunction('loAve', 2)"/> 
+Mid-Low Average:  <input type = "text" style="width:30px" id="mloAve" onchange="myFunction('mloAve', 4)" /> 
+Mid-High Average: <input type = "text" style="width:30px" id="mhAve" onchange="myFunction('mhAve', 6)"/> 
+High Average: <input type = "text" style="width:30px" id = "hiAve" onchange="myFunction('hiAve', 8)"/><br>
 
-Poverty Variation: <input type = "text" style="width:30px" id="poVar"/> 
-Low Variation: <input type = "text" style="width:30px" id="loVar"/> 
-Mid-Low Variation: <input type = "text" style="width:30px" id = "mlVar"/> 
-Mid-High Variation: <input type = "text" style="width:30px" id="mhVar"/> 
-High Variation: <input type = "text" style="width:30px" id="hiVar"/><br>
+Poverty Variation: <input type = "text" style="width:30px" id="poVar" onchange="myFunction('poVar', 1)"/> 
+Low Variation: <input type = "text" style="width:30px" id="loVar" onchange="myFunction('loVar', 3)"/> 
+Mid-Low Variation: <input type = "text" style="width:30px" id = "mlVar" onchange="myFunction('mlVar', 5)"> 
+Mid-High Variation: <input type = "text" style="width:30px" id="mhVar" onchange="myFunction('mhVar', 7)"/> 
+High Variation: <input type = "text" style="width:30px" id="hiVar" onchange="myFunction('hiVar', 9)"/><br>
 
 <br><b>Major</b><br>
 
-Business Average: <input type = "text" style="width:30px" id="buAve"/> 
-Engineering Average: <input type = "text" style="width:30px" id="enAve"/> 
-Tech Average: <input type = "text" style="width:30px" var id="teAve"/> 
-Fine Arts Average: <input type = "text" style="width:30px" id="faAve"/> 
-Lib Arts Average: <input type = "text" style="width:30px" id="laAve"/><br>
+Business Average: <input type = "text" style="width:30px" id="buAve" "myFunction('buAve', 0)"/> 
+Engineering Average: <input type = "text" style="width:30px" id="enAve" "myFunction('enAve', 2)"/> 
+Tech Average: <input type = "text" style="width:30px" var id="teAve" "myFunction('teAve', 4)"/> 
+Fine Arts Average: <input type = "text" style="width:30px" id="faAve" "myFunction('faAve', 6)"/> 
+Lib Arts Average: <input type = "text" style="width:30px" id="laAve" "myFunction('laAve', 8)"/><br>
 
-Business Variation: <input type = "text" style="width:30px" id="buVar"/> 
-Engineering Variation: <input type = "text" style="width:30px" id="enVar"/> 
-Tech Variation: <input type = "text" style="width:30px" id="teVar"/> 
-Fine Arts Variation: <input type = "text" style="width:30px" id="faVar"/> 
-Lib Arts Variation: <input type = "text" style="width:30px" id="laVar"/><br>
+Business Variation: <input type = "text" style="width:30px" id="buVar" "myFunction('buVar', 1)"/> 
+Engineering Variation: <input type = "text" style="width:30px" id="enVar" "myFunction('enVar', 3)"/> 
+Tech Variation: <input type = "text" style="width:30px" id="teVar" "myFunction('teVar', 5)"/> 
+Fine Arts Variation: <input type = "text" style="width:30px" id="faVar" "myFunction('faVar', 7)"/> 
+Lib Arts Variation: <input type = "text" style="width:30px" id="laVar" "myFunction('laVar', 9)"/><br>
 </div>
-
+<hr>
 <div id="scoreArea">
 
-<h3>Score Table</h3></div>
-<button onclick="addSample2((Math.floor(Math.random() * 100) + 80))">Sample on New Score</button>
+<h3>Student Averages & # of Students Like a Position</h3></div>
+<button onclick="addSample2(100)">Create Sample with Current Student Averages</button>
 <div id = "tableArea">
 <table id = "scoreTable" class="sortable">
 <thead>
@@ -136,9 +141,14 @@ Lib Arts Variation: <input type = "text" style="width:30px" id="laVar"/><br>
 	</tr>
 </thead>
 <tbody id="scoreTbody"></tbody>
-</table>
-<h3 id = "sampleText"></h3>
 
+</table>
+
+<div id = "scoreArea">
+<h3 id = "sampleText"></h3>
+	<div id = "filterArea" style="float:right; width:300px">
+		
+	</div>
 	<table id = "sampleTable" class="sortable">
 	
 	<thead>
@@ -154,16 +164,27 @@ Lib Arts Variation: <input type = "text" style="width:30px" id="laVar"/><br>
 			<th>Athletic Score</th>
 			<th>Research Score</th>
 			<th>Events Score</th>
-			<th>Medical Score</th>
-			
-			
+			<th>Medical Score</th>			
 		</tr>
 	</thead>
 	<tbody id="tbody">
 	
         </tbody>
 
-	</table>	
+	</table>
+
+</div>
+	<br>
+	<table id="tfoot">
+			<th>Score Averages</th>
+			
+			
+			<th>Tuition Score</th>
+			<th>Athletic Score</th>
+			<th>Research Score</th>
+			<th>Events Score</th>
+			<th>Medical Score</th>
+	</table><br>	
 
 
 </div>
